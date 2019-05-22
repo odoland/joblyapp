@@ -1,11 +1,14 @@
 import axios from 'axios';
 
+
+const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE1NTg1NDkwNTB9.-6Qo-LGS9ntjmlaXtDcGI3eCq1MN0Q76KUTLOqpqBhg";
 export default class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
-    paramsOrData._token = ( // for now, hardcode token for "testing"
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
-      "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30" +
-      "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U");
+    // paramsOrData._token = ( // for now, hardcode token for "testing"
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
+    //   "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30" +
+    //   "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U");
+    paramsOrData._token = TOKEN;
 
     console.debug("API Call:", endpoint, paramsOrData, verb);
 
@@ -27,6 +30,15 @@ export default class JoblyApi {
     }
   }
 
+  static async loginUser() {
+    let res = await this.request('login', {
+      username: 'testuser',
+      password: 'secret',
+    }, 'post');
+    return res.token;
+  }
+
+  /** Pulling data from API  */
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
@@ -35,6 +47,15 @@ export default class JoblyApi {
   static async getCompanies() {
     let res = await this.request(`companies/`);
     return res.companies;
-
   }
+
+  static async getJobs() {
+    let res = await this.request('jobs');
+    return res.jobs;
+  }
+
+  /** Searching through API */
+  
+
+
 }
