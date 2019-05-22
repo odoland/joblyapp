@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {Route, BrowserRouter, Switch} from 'react-router-dom'
+import {Route, BrowserRouter, Switch, Redirect} from 'react-router-dom'
 import './App.css';
 import Navbar from './Navbar';
-// import Companies from './Companies';
-// import Company from './Company';
-// import Jobs from './Jobs';
+import Companies from './Companies';
+import Company from './Company';
+import Jobs from './Jobs';
 import Home from './Home';
-// import Profile from './Profile';
-// import Login from './Login';
+import Profile from './Profile';
+import Login from './Login';
 
 class App extends Component {
   render(){
@@ -17,12 +17,13 @@ class App extends Component {
           <Navbar />
 
           <Switch>
-            {/* <Route exact to='/companies' render={rtProps => <Companies {...rtProps} />} />
-            <Route exact to='/company/:company'render={rtProps => <Company {...rtProps} />}/>
-            <Route exact to='/jobs' render={rtProps => <Jobs {...rtProps} />}/>
-            <Route exact to='/login' render={rtProps => <Login {...rtProps} />}/>
-            <Route exact to='/profile' render={rtProps => <Profile {...rtProps} />}/> */}
-            <Route exact to='/' render={rtProps => <Home {...rtProps} />} />
+            <Route exact path='/' render={rtProps => <Home {...rtProps} />} />
+            <Route exact path='/companies' render={rtProps => <Companies {...rtProps} />} />
+            <Route exact path='/company/:company'render={rtProps => <Company {...rtProps} />}/>
+            <Route exact path='/jobs' render={rtProps => <Jobs {...rtProps} />}/>
+            <Route exact path='/login' render={rtProps => <Login {...rtProps} />}/>
+            <Route exact path='/profile' render={rtProps => <Profile {...rtProps} />}/>
+            <Redirect to="/" />
           </Switch>
         </BrowserRouter>
 

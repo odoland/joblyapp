@@ -1,4 +1,6 @@
-class JoblyApi {
+import axios from 'axios';
+
+export default class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
     paramsOrData._token = ( // for now, hardcode token for "testing"
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
@@ -32,6 +34,7 @@ class JoblyApi {
 
   static async getCompanies() {
     let res = await this.request(`companies/`);
+    return res.companies;
 
   }
 }
