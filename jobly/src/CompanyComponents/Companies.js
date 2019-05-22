@@ -12,6 +12,7 @@ export default class Companies extends Component{
     this.state = {
       companies: []
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async componentWillMount() {
@@ -21,8 +22,10 @@ export default class Companies extends Component{
   }
 
   /** displays the companies matching the search term */
-  handleSubmit(search) {
-    JoblyApi.searchCompany()
+  async handleSubmit(search) {
+    console.log(search)
+    let res = await JoblyApi.search('companies',search);
+    this.setState({companies: res})
   }
 
   render(){
@@ -30,7 +33,7 @@ export default class Companies extends Component{
     // each company is { handle, name, description, logo_url }
     return (
       <div>
-        <Search />
+        <Search handleSubmit={this.handleSubmit}/>
 
         <p> List of companies: </p>
         { companies.map(c => <CompanyCard 

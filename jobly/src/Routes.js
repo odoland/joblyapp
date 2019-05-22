@@ -11,15 +11,43 @@ import Login from './NavBarComponents/Login';
 
 export default class Routes extends Component {
   
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    }
+
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({
+      isLoggedIn: localStorage.getItem('token') ? true : false
+    })
+  }
+
+  login(token) {
+    localStorage.setItem('token', token);
+    this.setState({isLoggedIn: true});
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.setState({isLoggedIn: false});
+  }
+ 
+
   render() {
+    ;
     return (
       <BrowserRouter>
-        <Navbar />
+        <Navbar isLoggedIn={this.state.isLoggedIn} logout={this.logout} />
         <Switch>
+          <Route exact path='/login' render={rtProps => <Login isLoggedIn={this.state.isLoggedIn} login={this.login} {...rtProps} />} />
           <Route exact path='/companies' render={rtProps => <Companies {...rtProps} />} />
           <Route path='/company/:handle' render={rtProps => <Company {...rtProps} />} />
           <Route exact path='/jobs' render={rtProps => <Jobs {...rtProps} />} />
-          <Route exact path='/login' render={rtProps => <Login {...rtProps} />} />
           <Route exact path='/profile' render={rtProps => <Profile {...rtProps} />} />
           <Route exact path='/' render={rtProps => <Home {...rtProps} />} />
           <Redirect to="/" />

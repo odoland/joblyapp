@@ -30,10 +30,10 @@ export default class JoblyApi {
     }
   }
 
-  static async loginUser() {
+  static async loginUser(username, password) {
     let res = await this.request('login', {
-      username: 'testuser',
-      password: 'secret',
+      username: username || 'testuser',
+      password: password || 'secret',
     }, 'post');
     return res.token;
   }
@@ -52,6 +52,11 @@ export default class JoblyApi {
   static async getJobs() {
     let res = await this.request('jobs');
     return res.jobs;
+  }
+  
+  static async search(path, search) {
+    let res = await this.request(`${path}?search=${search}`);
+    return res[path];
   }
 
   /** Searching through API */

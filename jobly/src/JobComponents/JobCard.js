@@ -8,6 +8,7 @@ export default class JobCard extends Component {
         <div className="card">
           <p> {title} {company_handle} </p>
           <p> {salary} {state} {equity} </p>
+          <button>Apply!</button>
         </div>
         )
   }
