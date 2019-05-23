@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class CompanyCard extends Component {
   constructor(props) {
     super(props)
-    
+
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(e) {
@@ -13,13 +13,20 @@ export default class CompanyCard extends Component {
 
   render() {
 
-    const { handle, name, description, logo_url } = this.props;
+    const { handle, name, description } = this.props;
+    let temp_url = "http://www.qrstuff.com/images/sample.png";
+    // logo url is broken currently
     return (
-        <div onClick={this.handleClick} className="card">
-          <p> {handle} {name} </p>
-          <img className="card-img-top" alt={description} src={logo_url} />
-          
+      <div className="py-3">
+        <div onClick={this.handleClick} className="card mx-auto py2" style={{ width: "30rem" }}>
+          <img className="card-img-top mx-auto" style={{ height: "10rem", width: "10rem" }} alt="Not available" src={temp_url} />
+          <div className="card-body">
+            <h5 className="card-title"> {name} </h5>
+            <h6 className="card-subtitle mb-2 text-muted"> {handle} </h6>
+            <p className="card-text"> {description} </p>
+          </div>
         </div>
-        )
+      </div>
+    )
   }
 }

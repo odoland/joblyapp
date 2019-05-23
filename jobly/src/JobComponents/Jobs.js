@@ -30,7 +30,7 @@ export default class Jobs extends Component {
     // each company is { handle, name, description, logo_url }
     return (
       <div>
-        <p> List of jobs: </p>
+        <h1> Jobs </h1>
         <Search handleSubmit={this.handleSubmit} />
         { jobs.map(c => <JobCard {...c} />) }
         </div>

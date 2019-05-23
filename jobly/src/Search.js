@@ -25,9 +25,9 @@ export default class Search extends Component {
   
   render() {
     return (
-      <form onSubmit={this.passToParentSubmit} className="form-inline my-2 my-lg-0">
-        <input onChange={this.handleChange} name="search" className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form onSubmit={this.passToParentSubmit} className="mx-auto" style={{width: "400px"}}>
+        <input onChange={this.handleChange} name="search" className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+        {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
       </form>
     )
   }

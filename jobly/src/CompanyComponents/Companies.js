@@ -32,10 +32,9 @@ export default class Companies extends Component{
     const { companies } = this.state;
     // each company is { handle, name, description, logo_url }
     return (
-      <div>
+      <div className="mx-auto">
+        <h1> Companies </h1>
         <Search handleSubmit={this.handleSubmit}/>
-
-        <p> List of companies: </p>
         { companies.map(c => <CompanyCard 
                                 handleSubmit={this.handleSubmit} 
                                 {...c}
