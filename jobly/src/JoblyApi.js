@@ -59,6 +59,11 @@ export default class JoblyApi {
     return res[path];
   }
 
+  static async registerUser(user){
+    console.log("about to register:", user);
+    let res = await this.request(`users`, user, 'post');
+    return res.token;
+  }
   /** Searching through API */
   
 

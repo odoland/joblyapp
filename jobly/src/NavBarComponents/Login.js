@@ -6,9 +6,12 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newUser: false,
       username: '',
       password: '',
-      new: false
+      email: '',
+      first_name: '',
+      last_name: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,9 +22,14 @@ export default class Login extends Component {
   async handleSubmit(e) {
     e.preventDefault();
 
-    // if the form has email then call JoblyApi.registerUser instead and fix state 
-    // to include register fields
-    let token = await JoblyApi.loginUser(this.state.username, this.state.password);
+    // if the state is equal then call JoblyApi.registerUser instead
+    let token
+    if (this.state.newUser){
+      let { newUser, ...user} = this.state;
+      token = await JoblyApi.registerUser(user);
+    }else {
+      token = await JoblyApi.loginUser(this.state.username, this.state.password);
+    }
     
     // Successful log in
     if (token) {
@@ -34,7 +42,7 @@ export default class Login extends Component {
   }
 
   toggleNew() {
-    this.setState({ new: !this.state.new })
+    this.setState({ newUser: !this.state.newUser })
   }
 
 
@@ -47,22 +55,19 @@ export default class Login extends Component {
   render() {
     const newForm = (
       <React.Fragment>
-        <label htmlFor="firstName">First Name</label>
-        <input onChange={this.handleChange} name="firstName" className="form-control mr-sm-2" type="text" placeholder="Enter First Name here" />
+        <label htmlFor="first_name">First Name</label>
+        <input onChange={this.handleChange} name="first_name" className="form-control mr-sm-2" type="text" placeholder="Enter First Name here" />
 
-        <label htmlFor="lastName">Last Name</label>
-        <input onChange={this.handleChange} name="lastName" className="form-control mr-sm-2" type="text" placeholder="Enter Last Name here" />
+        <label htmlFor="last_name">Last Name</label>
+        <input onChange={this.handleChange} name="last_name" className="form-control mr-sm-2" type="text" placeholder="Enter Last Name here" />
 
-        <label htmlFor="Email">Email</label>
-        <input onChange={this.handleChange} name="Email" className="form-control mr-sm-2" type="email" placeholder="Enter Email here" />
-        
-        <label htmlFor="photoUrl">photo Url</label>
-        <input onChange={this.handleChange} name="photoUrl" className="form-control mr-sm-2" type="url" placeholder="Enter photo Url here" />
+        <label htmlFor="email">Email</label>
+        <input onChange={this.handleChange} name="email" className="form-control mr-sm-2" type="email" placeholder="Enter Email here" />
       </React.Fragment>)
     
     return (
       <div>
-        <button onClick={this.toggleNew}>{this.state.new ? 'Log In': 'New User'}</button>
+        <button onClick={this.toggleNew}>{this.state.newUser ? 'Log In': 'New User'}</button>
           
           <form onSubmit={this.handleSubmit} className="form-inline my-2 my-lg-0">
             <label htmlFor="username">Username</label>
@@ -71,8 +76,8 @@ export default class Login extends Component {
             <label htmlFor="password">Password</label>
             <input onChange={this.handleChange} name="password" className="form-control mr-sm-2" type="password" placeholder="Enter password here" />
 
-            {this.state.new ? newForm : ''}
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">{this.state.new ? 'Register' : 'Log In'}</button>
+            {this.state.newUser ? newForm : ''}
+            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">{this.state.newUser ? 'Register' : 'Log In'}</button>
           </form>
 
       </div>
