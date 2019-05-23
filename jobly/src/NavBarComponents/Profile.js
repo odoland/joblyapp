@@ -29,7 +29,6 @@ export default class Profile extends Component {
         delete body[key];
     }
 
-
     let user = await JoblyApi.updateUser(localStorage.getItem('username'), body);
     if (user){
       this.props.history.push('/');
@@ -37,7 +36,6 @@ export default class Profile extends Component {
       this.props.history.push('/profile');
     }
     
-
   }
 
   handleChange(e) {

@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
 
 export default class JobCard extends Component {
+  constructor(props) {
+    super(props);
+    this.handleApply = this.handleApply.bind(this);
+  }
 
+  handleApply(evt) {
+    const jobid = evt.target.id;
+    this.props.handleApplication(jobid);
+  }
   render() {
-    const { company_handle, title, salary, equity } = this.props;
-    console.log(this.props);
+    const { id, company_handle, title, salary, equity, applied } = this.props;
+    const applyButton = <button id={id} onClick={this.handleApply} className="btn btn-danger">Apply!</button>;
+    const disabledButton = <button id={id} className="btn btn-danger" disabled>Applied!</button>;
+
     return (
       <div className="py-3">
         <div className="card mx-auto" style={{ width: "30rem" }}>
@@ -13,7 +23,7 @@ export default class JobCard extends Component {
             <h6 className="card-subtitle mb-2 text-muted"> ${salary} </h6>
             <p className="card-text"> Equity: {equity} </p>
           </div>
-          <button className="btn btn-danger">Apply!</button>
+          { applied ? disabledButton : applyButton }
         </div>
       </div>
     )

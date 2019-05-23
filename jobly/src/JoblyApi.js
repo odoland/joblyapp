@@ -74,6 +74,16 @@ export default class JoblyApi {
     let {username, password, ...info} = res.user;
     return info;
   }
+
+  static async applyToJob(jobid, username, state) {
+    let body = {
+      username,
+      state 
+    };
+    let res = await this.request(`jobs/${jobid}/apply`, body, 'post');
+    return res.message;
+
+  }
   /** Searching through API */
   
 

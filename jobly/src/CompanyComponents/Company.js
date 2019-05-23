@@ -10,22 +10,61 @@ export default class Company extends Component {
     this.state = {
       company: {}
     }
+
+    this.handleApplication = this.handleApplication.bind(this);
   }
 
   async componentWillMount() {
     const { handle } = this.props.match.params;
-    const company = await JoblyApi.getCompany(handle);
+    const username = localStorage.getItem('username');
+    
+    
+    // This will grab all the jobs available as well as the users
+    const promises = [JoblyApi.getCompany(handle), JoblyApi.getUser(username)];
 
+    let [company, user] = await Promise.all(promises);
+    
+    const appliedJobIds = new Set(user.jobs.map(j => j.id));
+    
+    let jobs = company.jobs
+    jobs = jobs.map(job => {
+      return appliedJobIds.has(job.id) ? 
+        {...job, key: uuid(), applied: true} : 
+        {...job, key: uuid(), applied: false} 
+    });
 
-    company.jobs = company.jobs.map(j => ({...j, key: uuid()}));
+    company.jobs = jobs;
 
     this.setState({company});
+  }
+
+  async handleApplication(jobid) {
+
+
+    const username = localStorage.getItem('username');
+    await JoblyApi.applyToJob(jobid, username, 'applied');
+
+    const { jobs } = this.state.company;
+    let updatedJobs = jobs.map(j => {
+      if (j.id === +jobid) {
+        j.applied = true;
+      }
+      return j
+    });
+
+    this.setState({
+      company: { 
+        ...this.state.company,
+        jobs: updatedJobs
+      }
+    });
+
   }
   render() {
     const { jobs } = this.state.company;
     return (
       <div>
-        { jobs ? jobs.map( job =>  <JobCard  key={job.key} {...job}/>) :
+        { jobs ? jobs.map( job =>  <JobCard handleApplication={this.handleApplication} key={job.key} {...job}/>) :
         "Nothing" }
       </div>
     )
