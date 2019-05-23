@@ -29,15 +29,15 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="mr-5 order-0">
+        <div className="mr-5 order-0">
           <NavLink className="navbar-brand" exact to='/' activeStyle={style}>Jobly</NavLink>
         </div>
-        <div class="order-1 mx-auto">
+        <div className="order-1 mx-auto">
           <NavLink className="navbar-brand" exact to='/companies' activeStyle={style}>Companies</NavLink>
           <NavLink className="navbar-brand" exact to='/jobs' activeStyle={style}>Jobs</NavLink>
           <NavLink className="navbar-brand" exact to='/profile' activeStyle={style}>Profile</NavLink>
         </div>
-        <div class="order-3 ml-5">
+        <div className="order-3 ml-5">
           {this.props.isLoggedIn ? LogoutButton : LoginNavLink}
         </div>
       </nav>
