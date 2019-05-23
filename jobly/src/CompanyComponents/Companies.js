@@ -23,7 +23,6 @@ export default class Companies extends Component{
 
   /** displays the companies matching the search term */
   async handleSubmit(search) {
-    console.log(search)
     let res = await JoblyApi.search('companies',search);
     this.setState({companies: res})
   }

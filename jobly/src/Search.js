@@ -13,7 +13,6 @@ export default class Search extends Component {
 
   passToParentSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
     this.props.handleSubmit(this.state.search);
   }
 

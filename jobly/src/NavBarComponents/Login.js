@@ -24,17 +24,17 @@ export default class Login extends Component {
     e.preventDefault();
 
     // Grab a token - either from registration or loggin in
-    let token;
+    let token, username;
     if (this.state.newUser) {
       let { newUser, ...user } = this.state;
-      token = await JoblyApi.registerUser(user);
+      [token, username] = await JoblyApi.registerUser(user);
     } else {
-      token = await JoblyApi.loginUser(this.state.username, this.state.password);
+      [token, username] = await JoblyApi.loginUser(this.state.username, this.state.password);
     }
 
     // Successful log in / registration
     if (token) {
-      this.props.login(token);
+      this.props.login(token, username);
       this.props.history.push('/')
     } else {
       this.props.history.push('/login')

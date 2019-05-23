@@ -25,8 +25,9 @@ export default class Routes extends Component {
     })
   }
 
-  login(token) {
+  login(token, username) {
     localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
     this.setState({isLoggedIn: true});
   }
 
