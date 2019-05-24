@@ -19,7 +19,7 @@ class JobCard extends Component {
 
     return (
       <div className="py-3">
-        <div className="card mx-auto" style={{ width: "30rem" }}>
+        <div className="card mx-auto" style={{ width: "50rem" }}>
           <div className="card-body">
             <h5 className="card-title"> {title} <i>{company_handle}</i> </h5>
             <h6 className="card-subtitle mb-2 text-muted"> ${salary} </h6>

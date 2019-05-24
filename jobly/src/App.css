@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background: url("https://c2.staticflickr.com/4/3426/3958842873_fb2aa9ef65_b.jpg");
+  background-image: url('./alejandro-escamilla-1-unsplash.jpg');
   background-size: cover;
   height: 100vh; /* 100% of user's view height */
 }

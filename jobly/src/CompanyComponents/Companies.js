@@ -34,7 +34,7 @@ class Companies extends Component{
     // each company is { handle, name, description, logo_url }
     return (
       <div className="mx-auto">
-        <h1> Companies </h1>
+        <h1 style={{ color: "white"}}> Companies </h1>
         <Search handleSubmit={this.handleSubmit}/>
         { companies.map(c => <CompanyCard 
                                 handleSubmit={this.handleSubmit} 

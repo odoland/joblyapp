@@ -1,0 +1,24 @@
+.jumbotron {
+  background-color: whitesmoke
+}
+
+.Mars {
+  background-image: url('https://i.ytimg.com/vi/97Y1i6mKjRU/maxresdefault.jpg');
+  background-size: cover; 
+  background-repeat: no-Repeat; 
+  min-height: 150px
+}
+
+.aboutTitle {
+  color: red
+}
+
+.aboutText {
+  font-size: 50px;
+  font-weight: 500;
+  color: maroon;
+}
+
+strong {
+  font-size: 50px;
+}

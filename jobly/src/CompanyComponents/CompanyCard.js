@@ -20,7 +20,7 @@ class CompanyCard extends Component {
     // logo url is broken currently
     return (
       <div className="py-3">
-        <div onClick={this.handleClick} className="card mx-auto py2" style={{ width: "30rem" }}>
+        <div onClick={this.handleClick} className="card mx-auto py2" style={{ width: "50rem" }}>
           <img className="card-img-top mx-auto" style={{ height: "10rem", width: "10rem" }} alt="Not available" src={temp_url} />
           <div className="card-body">
             <h5 className="card-title"> {name} </h5>

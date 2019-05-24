@@ -59,10 +59,10 @@ class Jobs extends Component {
   render(){
     const { jobs } = this.state;
  
-    // each company is { handle, name, description, logo_url }
+    // each job is {id, title, company-handle, salary, equity, state}
     return (
       <div>
-        <h1> Jobs </h1>
+        <h1 style={{ color: "white"}}> Jobs </h1>
         <Search handleSubmit={this.handleSubmit} />
         { jobs.map(c => <JobCard handleApplication={this.handleApplication} {...c} />) }
         </div>

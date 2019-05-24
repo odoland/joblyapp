@@ -83,7 +83,7 @@ class Login extends Component {
         <div className="card mx-auto" style={{ width: "30rem" }}>
 
           <button
-            className="btn btn-outline-secondary"
+            className="btn btn-outline-secondary register"
             onClick={this.toggleNew}>{this.state.newUser ? 'Log In' : 'No account yet? Register'}
           </button>
           <div className="card-body">

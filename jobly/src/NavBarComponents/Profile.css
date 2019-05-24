@@ -1,0 +1,17 @@
+.base {
+  transition: height .5s ease-in-out;
+  overflow: hidden;
+  padding: 0;
+}
+
+.hide {
+  height: 0;
+}
+
+.show {
+  height: 500px;
+}
+
+form {
+  padding: 1rem;
+}
