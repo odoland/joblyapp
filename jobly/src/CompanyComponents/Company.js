@@ -3,7 +3,9 @@ import JoblyApi from '../JoblyApi';
 import JobCard from '../JobComponents/JobCard';
 import uuid from 'uuid/v4';
 
-export default class Company extends Component {
+import { withRouter } from "react-router";
+
+class Company extends Component {
   
   constructor(props) {
     super(props);
@@ -25,6 +27,7 @@ export default class Company extends Component {
     let [company, user] = await Promise.all(promises);
     
     const appliedJobIds = new Set(user.jobs.map(j => j.id));
+    // O ( m + n)
     
     let jobs = company.jobs
     jobs = jobs.map(job => {
@@ -70,3 +73,6 @@ export default class Company extends Component {
     )
   }
 }
+
+export default withRouter(Company);
+

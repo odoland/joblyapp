@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from "react-router";
 
-export default class JobCard extends Component {
+
+class JobCard extends Component {
   constructor(props) {
     super(props);
     this.handleApply = this.handleApply.bind(this);
@@ -29,3 +31,5 @@ export default class JobCard extends Component {
     )
   }
 }
+
+export default withRouter(JobCard);

@@ -77,13 +77,13 @@ export default class JoblyApi {
 
   static async applyToJob(jobid, username, state) {
     let body = {
-      username,
-      state 
+      username, // user name
+      state  // applied
     };
     let res = await this.request(`jobs/${jobid}/apply`, body, 'post');
     return res.message;
-
   }
+
   /** Searching through API */
   
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import JoblyApi from '../JoblyApi';
+import { withRouter } from 'react-router';
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -84,3 +85,5 @@ export default class Profile extends Component {
     )
   }
 }
+
+export default withRouter(Profile);

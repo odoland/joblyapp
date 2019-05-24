@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
+import { withRouter } from 'react-router';
 
 const style = {
   color: 'skyblue'
@@ -45,4 +46,4 @@ class Navbar extends Component {
   }
 
 }
-export default Navbar;
+export default withRouter(Navbar);

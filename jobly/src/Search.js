@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from "react-router";
+import _ from 'lodash';
 
-export default class Search extends Component {
+
+const DEBOUNCE = 500;
+class Search extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
       search: ""
     }
-    this.passToParentSubmit = this.passToParentSubmit.bind(this);
+    this.passToParentSubmit = _.debounce(this.passToParentSubmit.bind(this), DEBOUNCE);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -19,6 +23,7 @@ export default class Search extends Component {
 
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
+    this.passToParentSubmit(e);
   }
 
   
@@ -31,3 +36,5 @@ export default class Search extends Component {
     )
   }
 }
+
+export default withRouter(Search);

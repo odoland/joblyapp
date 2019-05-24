@@ -3,8 +3,10 @@ import uuid from 'uuid/v4';
 import JoblyApi from '../JoblyApi.js';
 import JobCard from './JobCard.js';
 import Search from '../Search';
+import { withRouter } from "react-router";
 
-export default class Jobs extends Component {
+
+class Jobs extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +28,7 @@ export default class Jobs extends Component {
     jobs = jobs.map(job => {
       return appliedJobIds.has(job.id) ? 
         {...job, key: uuid(), applied: true} : 
-        {...job, key: uuid(),  applied: false} 
+        {...job, key: uuid(), applied: false} 
     });
       
     this.setState({ jobs });
@@ -67,3 +69,5 @@ export default class Jobs extends Component {
     )
   }
 }
+
+export default withRouter(Jobs);

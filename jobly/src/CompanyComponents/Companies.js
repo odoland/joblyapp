@@ -4,7 +4,9 @@ import CompanyCard from './CompanyCard';
 import uuid from 'uuid/v4';
 import Search from '../Search.js';
 
-export default class Companies extends Component{
+import { withRouter } from "react-router";
+
+class Companies extends Component{
   // <NavLink to='/logout'>Log out</NavLink>
 
   constructor(props) {
@@ -42,3 +44,5 @@ export default class Companies extends Component{
     )
   }
 }
+
+export default withRouter(Companies);

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import JoblyApi from '../JoblyApi';
 import './Login.css';
+import { withRouter } from 'react-router';
+
 /** Component that renders log in / registration Form  */
-export default class Login extends Component {
+class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -12,7 +14,8 @@ export default class Login extends Component {
       password: '',
       email: '',
       first_name: '',
-      last_name: ''
+      last_name: '',
+      invalid: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,20 +28,23 @@ export default class Login extends Component {
 
     // Grab a token - either from registration or loggin in
     let token, username;
-    if (this.state.newUser) {
-      let { newUser, ...user } = this.state;
-      [token, username] = await JoblyApi.registerUser(user);
-    } else {
-      [token, username] = await JoblyApi.loginUser(this.state.username, this.state.password);
+    try {
+      if (this.state.newUser) {
+        let { newUser, ...user } = this.state;
+        [token, username] = await JoblyApi.registerUser(user);
+      } else {
+        [token, username] = await JoblyApi.loginUser(this.state.username, this.state.password);
+      }
+
+      if (token) {
+        this.props.login(token, username);
+        this.props.history.push('/')
+      }
+    } catch(err) {
+      this.setState({ invalid: err});
     }
 
     // Successful log in / registration
-    if (token) {
-      this.props.login(token, username);
-      this.props.history.push('/')
-    } else {
-      this.props.history.push('/login')
-    }
   }
 
   toggleNew() {
@@ -101,9 +107,13 @@ export default class Login extends Component {
 
             </form>
           </div>
-
+        {this.state.invalid ? <div className="alert alert-danger" role="alert">
+          {this.state.invalid}
+          </div> : ''}
         </div>
       </div>
     )
   }
 }
+
+export default withRouter(Login);
