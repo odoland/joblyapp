@@ -8,7 +8,7 @@ export default class JoblyApi {
     paramsOrData._token = localStorage.getItem('token');
 
     console.debug("API Call:", endpoint, paramsOrData, verb);
-
+    console.debug("API url:", `${BASE_URL}${endpoint}` );
     try {
       return (await axios({
         method: verb,
