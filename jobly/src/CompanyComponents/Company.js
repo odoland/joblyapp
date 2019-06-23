@@ -64,9 +64,20 @@ class Company extends Component {
 
   }
   render() {
-    const { jobs } = this.state.company;
+    const { name, handle, description, jobs } = this.state.company;
+
     return (
       <div>
+      <div className="py-3">
+        <div onClick={this.handleClick} className="card mx-auto py2 CompBG" style={{ width: "50rem" }}>
+            <h2 className="text-white">Company Profile</h2>
+          <div className="card-body ThickFont">
+            <h5 className="card-title"> {name} </h5>
+            <h6 className="card-subtitle mb-2 text-muted"> {handle} </h6>
+            <p className="card-text"> {description} </p>
+          </div>
+        </div>
+      </div>
         { jobs ? jobs.map( job =>  <JobCard handleApplication={this.handleApplication} key={job.key} {...job}/>) :
         "Nothing" }
       </div>

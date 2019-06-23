@@ -31,7 +31,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="mr-5 order-0">
-          <NavLink className="navbar-brand" exact to='/' activeStyle={style}>Jobly</NavLink>
+          <NavLink className="navbar-brand Jobly" exact to='/' activeStyle={style}><i className="fas fa-dove"></i> Jobly</NavLink>
         </div>
         <div className="order-1 mx-auto">
           <NavLink className="navbar-brand" exact to='/companies' activeStyle={style}>Companies</NavLink>

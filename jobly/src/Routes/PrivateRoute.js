@@ -5,8 +5,7 @@ import UserContext from "./UserContext"
 class PrivateRoute extends Component {
   static contextType = UserContext;
   render() {
-    // this.context will be the entire currentUser object or null if we hard refresh
-    console.log("this.contexttype", this.contextType, "context :", this.context);
+
     if (!this.context || !this.context.username) {
       return <Redirect to="/login" />;
     }

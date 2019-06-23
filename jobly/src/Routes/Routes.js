@@ -69,7 +69,7 @@ export default class Routes extends Component {
             </Switch>
           </main>
         </UserContext.Provider>
-      </BrowserRouter >
+      </BrowserRouter>
     )
   }
 }

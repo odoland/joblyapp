@@ -3,6 +3,7 @@ import JoblyApi from '../JoblyApi';
 import { withRouter } from 'react-router';
 import './Profile.css';
 import JobCard from '../JobComponents/JobCard';
+import uuid from 'uuid/v4';
 
 class Profile extends Component {
   constructor(props){
@@ -62,7 +63,7 @@ class Profile extends Component {
       height: '35px'
     }
 
-    let jobCards = this.state.jobs.map(j=> <JobCard {...j} applied={true} />);
+    let jobCards = this.state.jobs.map(j=> <JobCard key={uuid()} {...j} applied={true} />);
 
     return (
       <div className="py-5">
@@ -77,9 +78,13 @@ class Profile extends Component {
             
             <form onSubmit={this.handleSubmit}>
 
+              <div>
+                <input name="username" autoComplete="username" hidden></input>
+              </div>
+
               <div className="form-group mb-3">
                 <label htmlFor="password">Password?</label>
-                <input onChange={this.handleChange} name="password" className="form-control" value={this.state.password} type="password" placeholder="Change your password here" />
+                <input onChange={this.handleChange} name="password" className="form-control" value={this.state.password} type="password" placeholder="Change your password here" autoComplete="current-password" />
               </div>
 
               <div className="form-group mb-3">

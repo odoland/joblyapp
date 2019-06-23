@@ -15,7 +15,7 @@ class Login extends Component {
       email: '',
       first_name: '',
       last_name: '',
-      invalid: false
+      invalid: false, // Stores error message from invalid login/registration
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,25 +30,28 @@ class Login extends Component {
     let token, username;
     try {
       if (this.state.newUser) {
-        let { newUser, ...user } = this.state;
+        // Remove the newUser and invalid keys from state
+        let { newUser, invalid, ...user } = this.state;
         [token, username] = await JoblyApi.registerUser(user);
       } else {
         [token, username] = await JoblyApi.loginUser(this.state.username, this.state.password);
       }
 
+      // Successful login/registration
       if (token) {
         this.props.login(token, username);
         this.props.history.push('/')
       }
-    } catch(err) {
-      this.setState({ invalid: err});
+    } catch (err) {
+      this.setState({ invalid: err });
     }
 
     // Successful log in / registration
   }
 
+  // toggles from Login <-> Registration, resetting the invalid error messages
   toggleNew() {
-    this.setState({ newUser: !this.state.newUser })
+    this.setState({ invalid: null, newUser: !this.state.newUser })
   }
 
   handleChange(e) {
@@ -89,6 +92,10 @@ class Login extends Component {
           <div className="card-body">
             {/* Button to toggle Log In vs Registration */}
 
+            {this.state.invalid && <div className="alert alert-danger" role="alert">
+              {this.state.invalid}
+            </div>}
+
             <form onSubmit={this.handleSubmit}>
 
               <div className="form-group mb-3">
@@ -107,9 +114,6 @@ class Login extends Component {
 
             </form>
           </div>
-        {this.state.invalid ? <div className="alert alert-danger" role="alert">
-          {this.state.invalid}
-          </div> : ''}
         </div>
       </div>
     )
