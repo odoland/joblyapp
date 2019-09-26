@@ -9,7 +9,7 @@ User signup/login and authorization and authentication is dones with JWTs and bc
 
 # Deployment
 Try deployment here
-[Jobly Deployment](jobly-fe.herokuapp.com)
+[Jobly Deployment](http://jobly-fe.herokuapp.com)
 or locally,
 
 Starting the backend:
